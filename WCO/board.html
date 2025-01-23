@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>WCO | Board</title>
+
+  <style>
+    :root {
+      --transition-speed: 0.4s;
+      --primary-font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+      --bg-color: #ffffff;
+      --text-color: #000000;
+      --nav-bg: rgba(255, 255, 255, 0.8);
+      --nav-text-color: #000000;
+      --accent-color: #000000;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg-color: #000000;
+        --text-color: #ffffff;
+        --nav-bg: rgba(0, 0, 0, 0.8);
+        --nav-text-color: #ffffff;
+        --accent-color: #ffffff;
+      }
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: var(--primary-font);
+      background: var(--bg-color);
+      color: var(--text-color);
+      transition: background var(--transition-speed) ease, color var(--transition-speed) ease;
+      margin-top: 60px;
+    }
+
+    nav {
+      position: fixed;
+      top: 0; 
+      left: 0;
+      width: 100%;
+      background: var(--nav-bg);
+      backdrop-filter: blur(10px);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.5rem 1rem;
+      z-index: 9999;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+    }
+    .logo img {
+      width: 40px;
+      height: 40px;
+      margin-right: 0.5rem;
+      border-radius: 50%;
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 1rem;
+      margin: 0;
+      padding: 0;
+    }
+    nav a {
+      text-decoration: none;
+      color: var(--nav-text-color);
+      font-weight: 500;
+      transition: color var(--transition-speed) ease;
+    }
+    nav a:hover {
+      color: #0070c9;
+    }
+    .dark-mode-toggle {
+      cursor: pointer;
+      font-size: 1.2rem;
+      color: var(--nav-text-color);
+    }
+
+    h1, h2 {
+      text-align: center;
+      margin-top: 1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .president, .board-members {
+      max-width: 1000px;
+      margin: 1.5rem auto;
+      padding: 0 1rem;
+    }
+
+    .president-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      padding: 1rem;
+      margin-bottom: 2rem;
+    }
+    .president-card img {
+      width: 150px;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 50%;
+      margin-bottom: 1rem;
+    }
+    .president-card h3 {
+      margin: 0.5rem 0;
+      font-size: 1.2rem;
+    }
+    .president-links a {
+      display: inline-block;
+      padding: 0.5rem 1rem;
+      margin: 0.5rem;
+      background: var(--accent-color);
+      color: var(--bg-color);
+      border-radius: 4px;
+      text-decoration: none;
+      transition: background 0.3s ease;
+    }
+    .president-links a:hover {
+      background: #0070c9;
+    }
+
+    .board-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1rem;
+    }
+    .board-member {
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      padding: 1rem;
+      text-align: center;
+    }
+    .board-member img {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 50%;
+      margin-bottom: 0.5rem;
+    }
+    .board-member h4 {
+      margin: 0.5rem 0;
+      font-size: 1rem;
+    }
+    .member-links a {
+      display: inline-block;
+      padding: 0.4rem 0.8rem;
+      margin: 0.3rem;
+      background: var(--accent-color);
+      color: var(--bg-color);
+      border-radius: 4px;
+      text-decoration: none;
+      font-size: 0.85rem;
+      transition: background 0.3s ease;
+    }
+    .member-links a:hover {
+      background: #0070c9;
+    }
+
+    footer {
+      text-align: center;
+      padding: 0.5rem;
+      font-size: 0.8rem;
+      margin-top: 2rem;
+    }
+
+    body.dark-mode {
+      --bg-color: #000000;
+      --text-color: #ffffff;
+      --nav-bg: rgba(0, 0, 0, 0.8);
+      --nav-text-color: #ffffff;
+      --accent-color: #ffffff;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="logo">
+      <a href="index.html">
+        <img src="./assets/IMG_1362-removebg-preview.png" alt="WCO Logo">
+      </a>
+      <span style="font-weight: bold;">WCO</span>
+    </div>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="board.html">Board</a></li>
+      <li><a href="resources.html">Resources</a></li>
+    </ul>
+    <div class="dark-mode-toggle" id="darkModeToggle" title="Toggle Dark Mode">
+      &#9788;
+    </div>
+  </nav>
+
+  <h1>Our Board</h1>
+
+  <section class="president">
+    <h2>President</h2>
+    <div class="president-card">
+      <!-- Replace with actual president headshot -->
+      <img src="./resources/president-headshot.png" alt="President Headshot" />
+      <h3>President Name</h3>
+      <p>Short blurb about the president, their major, background, etc. (Optional)</p>
+      <div class="president-links">
+        <!-- LinkedIn & Resume -->
+        <a href="https://linkedin.com/in/PRESIDENT" target="_blank">LinkedIn</a>
+        <a href="./resources/PRESIDENT_RESUME.pdf" target="_blank">Resume</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="board-members">
+    <h2>Board Members</h2>
+    <div class="board-grid">
+      <!-- 8 placeholders below. Duplicate/remove as needed. -->
+       <!-- TO ADD PICTURE/MAJOR/ROLE PICK AN EMPTY SPOT, ADD IMAGE TO ASSETS FOLDER, AND REFERENCE IMAGE-->
+        <!-- EX: -->
+         <!-- <img src="./assets/jacobsilvaHeadshot.png" alt="Board Member 2" /> -->
+          <!-- <h4>Jacob Silva/h4> -->
+            <!-- <p> Computer Science / Board Member </p> -->
+      <div class="board-member">
+        <img src="./resources/headshot1.png" alt="Board Member 1" />
+        <h4>Board Member 1</h4>
+        <p>Major/Role</p>
+        <div class="member-links">
+          <a href="https://linkedin.com/in/..." target="_blank">LinkedIn</a>
+          <a href="./resources/member1_resume.pdf" target="_blank">Resume</a>
+        </div>
+      </div>
+      <div class="board-member">
+        <img src="./resources/headshot2.png" alt="Board Member 2" />
+        <h4>Board Member 2</h4>
+        <p>Major/Role</p>
+        <div class="member-links">
+          <a href="https://linkedin.com/in/..." target="_blank">LinkedIn</a>
+          <a href="./resources/member2_resume.pdf" target="_blank">Resume</a>
+        </div>
+      </div>
+      <div class="board-member">
+        <img src="./resources/headshot3.png" alt="Board Member 3" />
+        <h4>Board Member 3</h4>
+        <p>Major/Role</p>
+        <div class="member-links">
+          <a href="https://linkedin.com/in/..." target="_blank">LinkedIn</a>
+          <a href="./resources/member3_resume.pdf" target="_blank">Resume</a>
+        </div>
+      </div>
+      <div class="board-member">
+        <img src="./resources/headshot4.png" alt="Board Member 4" />
+        <h4>Board Member 4</h4>
+        <p>Major/Role</p>
+        <div class="member-links">
+          <a href="https://linkedin.com/in/..." target="_blank">LinkedIn</a>
+          <a href="./resources/member4_resume.pdf" target="_blank">Resume</a>
+        </div>
+      </div>
+      <div class="board-member">
+        <img src="./resources/headshot5.png" alt="Board Member 5" />
+        <h4>Board Member 5</h4>
+        <p>Major/Role</p>
+        <div class="member-links">
+          <a href="https://linkedin.com/in/..." target="_blank">LinkedIn</a>
+          <a href="./resources/member5_resume.pdf" target="_blank">Resume</a>
+        </div>
+      </div>
+      <div class="board-member">
+        <img src="./resources/headshot6.png" alt="Board Member 6" />
+        <h4>Board Member 6</h4>
+        <p>Major/Role</p>
+        <div class="member-links">
+          <a href="https://linkedin.com/in/..." target="_blank">LinkedIn</a>
+          <a href="./resources/member6_resume.pdf" target="_blank">Resume</a>
+        </div>
+      </div>
+      <div class="board-member">
+        <img src="./resources/headshot7.png" alt="Board Member 7" />
+        <h4>Board Member 7</h4>
+        <p>Major/Role</p>
+        <div class="member-links">
+          <a href="https://linkedin.com/in/..." target="_blank">LinkedIn</a>
+          <a href="./resources/member7_resume.pdf" target="_blank">Resume</a>
+        </div>
+      </div>
+      <div class="board-member">
+        <img src="./resources/headshot8.png" alt="Board Member 8" />
+        <h4>Board Member 8</h4>
+        <p>Major/Role</p>
+        <div class="member-links">
+          <a href="https://linkedin.com/in/..." target="_blank">LinkedIn</a>
+          <a href="./resources/member8_resume.pdf" target="_blank">Resume</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    © 2024 World Computing Organization
+  </footer>
+
+  <script>
+    const toggleBtn = document.getElementById('darkModeToggle');
+    let isDarkMode = false;
+
+    if(localStorage.getItem('theme') === 'dark'){
+      document.body.classList.add('dark-mode');
+      isDarkMode = true;
+      toggleBtn.innerHTML = '&#9789;';
+    } else {
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      if(prefersDark){
+        document.body.classList.add('dark-mode');
+        isDarkMode = true;
+        toggleBtn.innerHTML = '&#9789;';
+      }
+    }
+
+    toggleBtn.addEventListener('click', () => {
+      isDarkMode = !isDarkMode;
+      document.body.classList.toggle('dark-mode');
+      toggleBtn.innerHTML = isDarkMode ? '&#9789;' : '&#9788;';
+      localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+    });
+  </script>
+</body>
+</html>

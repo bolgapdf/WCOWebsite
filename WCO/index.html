@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>World Computing Organization</title>
+
+  <style>
+    :root {
+      --transition-speed: 0.4s;
+      --primary-font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+      
+      /* light mode */
+      --bg-color: #ffffff;
+      --text-color: #000000;
+      --nav-bg: rgba(255, 255, 255, 0.8);
+      --nav-text-color: #000000;
+      --accent-color: #000000;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg-color: #000000;
+        --text-color: #ffffff;
+        --nav-bg: rgba(0, 0, 0, 0.8);
+        --nav-text-color: #ffffff;
+        --accent-color: #ffffff;
+      }
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: var(--primary-font);
+      background: var(--bg-color);
+      color: var(--text-color);
+      transition: background var(--transition-speed) ease, color var(--transition-speed) ease;
+      
+      scroll-snap-type: y mandatory;
+      height: 100%;
+      overscroll-behavior: none;
+    }
+
+    nav {
+      position: fixed;
+      top: 0; 
+      left: 0;
+      width: 100%;
+      background: var(--nav-bg);
+      backdrop-filter: blur(10px);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.5rem 1rem;
+      z-index: 9999;
+      transition: background var(--transition-speed) ease, color var(--transition-speed) ease;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+    }
+    .logo img {
+      width: 40px;
+      height: 40px;
+      margin-right: 0.5rem;
+      border-radius: 50%;
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 1rem;
+      margin: 0;
+      padding: 0;
+    }
+    nav a {
+      text-decoration: none;
+      color: var(--nav-text-color);
+      font-weight: 500;
+      transition: color var(--transition-speed) ease;
+    }
+    nav a:hover {
+      color: #0070c9;
+    }
+    .dark-mode-toggle {
+      cursor: pointer;
+      font-size: 1.2rem;
+      color: var(--nav-text-color);
+      display: flex;
+      align-items: center;
+      transition: color var(--transition-speed) ease;
+    }
+
+    body {
+      margin-top: 60px; 
+    }
+
+    section {
+      scroll-snap-align: start;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 1rem 0.5rem;
+    }
+    section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    #overview {
+      min-height: calc(100vh - 60px);
+    }
+    .hero-logo {
+      max-width: 150px;
+      margin: 1rem auto;
+      display: block;
+    }
+    .tagline {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin: 0.5rem 0;
+    }
+    .subtext {
+      max-width: 600px;
+      margin: 0 auto;
+      font-size: 0.95rem;
+      line-height: 1.4;
+    }
+
+    #projects,
+    #sponsors,
+    #events,
+    #join,
+    #connect {
+      min-height: 60vh;
+    }
+
+    h2 {
+      font-size: 1.3rem;
+      margin-bottom: 0.3rem;
+    }
+    .section-content {
+      max-width: 700px;
+      margin: 0 auto;
+      line-height: 1.4;
+      font-size: 0.9rem;
+    }
+    .btn {
+      display: inline-block;
+      padding: 0.6rem 1rem;
+      margin: 1rem 0.3rem;
+      background: var(--accent-color);
+      color: var(--bg-color);
+      border: none;
+      border-radius: 4px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.3s ease;
+    }
+    .btn:hover {
+      background: #0070c9;
+      color: #fff;
+    }
+
+    footer {
+      text-align: center;
+      padding: 0.5rem;
+      font-size: 0.8rem;
+    }
+
+    body.dark-mode {
+      --bg-color: #000000;
+      --text-color: #ffffff;
+      --nav-bg: rgba(0, 0, 0, 0.8);
+      --nav-text-color: #ffffff;
+      --accent-color: #ffffff;
+    }
+
+    .section-image {
+      margin: 1rem auto;
+      max-width: 400px;
+    }
+    .section-image img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+      justify-content: center;
+      margin-top: 1rem;
+    }
+    
+    
+    .social-links img {
+      width: 40px;
+      height: 40px;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+    .social-links img:hover {
+      transform: scale(1.1);
+    }
+
+    /* light mode to dark mode switch */
+    .dark-icon {
+      display: none;
+    }
+    .light-icon {
+      display: inline-block;
+    }
+
+    body.dark-mode .light-icon {
+      display: none;
+    }
+    body.dark-mode .dark-icon {
+      display: inline-block;
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="logo">
+      <img src="./assets/IMG_1362-removebg-preview.png" alt="WCO Logo">
+      <span style="font-weight: bold;">WCO</span>
+    </div>
+    <ul>
+      <li><a href="#overview">Overview</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#sponsors">Sponsors</a></li>
+      <li><a href="#events">Events</a></li>
+      <li><a href="#join">Join</a></li>
+      <li><a href="#connect">Connect</a></li>
+      <li><a href="board.html">Board</a></li>
+      <li><a href="resources.html">Resources</a></li>
+    </ul>
+    <div class="dark-mode-toggle" id="darkModeToggle" title="Toggle Dark Mode">
+      &#9788;
+    </div>
+  </nav>
+
+  <section id="overview">
+    <img class="hero-logo" src="./assets/IMG_1361-removebg-preview.png" alt="WCO Seal Logo" />
+    <h1 class="tagline">Bridging Business & Computer Science for Real-World Success</h1>
+    <p class="subtext">
+      We unite Computer Science and Business majors to collaborate on innovative projects,
+      host career-focused workshops, and help each other succeed in the ever-evolving tech industry.
+    </p>
+    <button class="btn" id="scrollToJoinBtn" style="margin-top: 1rem;">
+      Want to Join?
+    </button>
+  </section>
+
+  <section id="projects">
+    <h2>Projects</h2>
+    <div class="section-image">
+    </div>
+    <div class="section-content">
+      <p>No active projects yet, but we’re collecting ideas!</p>
+      <a href="https://forms.gle/YOUR_PROJECT_SUBMISSION_FORM" target="_blank" class="btn">
+        Submit a Project Idea
+      </a>
+    </div>
+  </section>
+
+  <section id="sponsors">
+    <h2>Sponsors & Partners</h2>
+    <div class="section-image">
+    </div>
+    <div class="section-content">
+      <p>We’re actively seeking sponsors and partners. Check back soon!</p>
+    </div>
+  </section>
+
+  <section id="events">
+    <h2>Upcoming Events</h2>
+    <div class="section-image">
+    </div>
+    <div class="section-content">
+      <ul style="list-style: none; padding: 0;">
+        <li><strong>Resume Workshops</strong> – Dates TBA</li>
+        <li><strong>Hackathon</strong> – 24/48-hour coding + business plan creation, TBA</li>
+        <li><strong>Guest Speakers</strong> – Stay tuned for announcements</li>
+      </ul>
+      <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=WCO+Meeting&dates=20250101T080000Z/20250101T090000Z&details=Monthly+Meeting&location=SDSU"
+         target="_blank" class="btn">
+        Add to Google Calendar
+      </a>
+      <a href="./assets/WCO-Event.ics" class="btn">Add to Apple Calendar</a>
+    </div>
+  </section>
+
+  <section id="join">
+    <h2>Join the Club</h2>
+    <div class="section-image">
+    </div>
+    <div class="section-content">
+      <p>Ready to bridge Computer Science and Business? Fill out our membership form!</p>
+      <!-- membership form link v -->
+      <a href="https://forms.gle/YOUR_MEMBERSHIP_FORM" target="_blank" class="btn">Membership Form</a>
+    </div>
+  </section>
+
+  <section id="connect">
+    <h2>Connect With Us</h2>
+    <div class="section-image">
+      <!-- e.g. <img src="./assets/connect-graphic.png" alt="Connect Graphic" /> -->
+    </div>
+    <div class="section-content">
+      <p>Follow us on GitHub, join our Discord, or send us an email!</p>
+      <div class="social-links">
+        <!-- GITHUB LINK: two icons (light/dark) -->
+        <a href="https://github.com/YOUR_GITHUB" target="_blank">
+          <img class="light-icon" src="./assets/github-light.svg" alt="GitHub Light" />
+          <img class="dark-icon" src="./assets/github-dark.png" alt="GitHub Dark" />
+        </a>
+        <!-- DISCORD LINK: two icons (light/dark) -->
+        <a href="https://discord.gg/YOUR_DISCORD_INVITE" target="_blank">
+          <img class="light-icon" src="./assets/discord-light.webp" alt="Discord Light" />
+          <img class="dark-icon" src="./assets/discord-dark.png" alt="Discord Dark" />
+        </a>
+        <!-- EMAIL LINK: two icons (light/dark) -->
+        <a href="mailto:youremail@example.com">
+          <img class="light-icon" src="./assets/email-light.png" alt="Email Light" />
+          <img class="dark-icon" src="./assets/email-dark.png" alt="Email Dark" />
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    © 2024 World Computing Organization
+  </footer>
+
+  <script>
+    const sections = document.querySelectorAll('section');
+    const observerOptions = { threshold: 0.1 };
+    const observer = new IntersectionObserver((entries, obs) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          obs.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+    sections.forEach(section => observer.observe(section));
+
+    const toggleBtn = document.getElementById('darkModeToggle');
+    let isDarkMode = false;
+
+    if(localStorage.getItem('theme') === 'dark'){
+      document.body.classList.add('dark-mode');
+      isDarkMode = true;
+      toggleBtn.innerHTML = '&#9789;';
+    } else {
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      if(prefersDark){
+        document.body.classList.add('dark-mode');
+        isDarkMode = true;
+        toggleBtn.innerHTML = '&#9789;';
+      }
+    }
+
+    toggleBtn.addEventListener('click', () => {
+      isDarkMode = !isDarkMode;
+      document.body.classList.toggle('dark-mode');
+      toggleBtn.innerHTML = isDarkMode ? '&#9789;' : '&#9788;';
+      localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+    });
+
+    const navLinks = document.querySelectorAll('nav a[href^="#"]');
+    navLinks.forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const targetID = link.getAttribute('href').replace('#','');
+        const targetEl = document.getElementById(targetID);
+        if (targetEl) {
+          targetEl.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    });
+
+    const scrollToJoinBtn = document.getElementById('scrollToJoinBtn');
+    if(scrollToJoinBtn) {
+      scrollToJoinBtn.addEventListener('click', () => {
+        const joinSection = document.getElementById('join');
+        if (joinSection) {
+          joinSection.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>WCO | Resources</title>
+
+  <style>
+    :root {
+      --transition-speed: 0.4s;
+      --primary-font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+      --bg-color: #ffffff;
+      --text-color: #000000;
+      --nav-bg: rgba(255, 255, 255, 0.8);
+      --nav-text-color: #000000;
+      --accent-color: #000000;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg-color: #000000;
+        --text-color: #ffffff;
+        --nav-bg: rgba(0, 0, 0, 0.8);
+        --nav-text-color: #ffffff;
+        --accent-color: #ffffff;
+      }
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: var(--primary-font);
+      background: var(--bg-color);
+      color: var(--text-color);
+      transition: background var(--transition-speed) ease, color var(--transition-speed) ease;
+      margin-top: 60px;
+    }
+
+    nav {
+      position: fixed;
+      top: 0; 
+      left: 0;
+      width: 100%;
+      background: var(--nav-bg);
+      backdrop-filter: blur(10px);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.5rem 1rem;
+      z-index: 9999;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+    }
+    .logo img {
+      width: 40px;
+      height: 40px;
+      margin-right: 0.5rem;
+      border-radius: 50%;
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 1rem;
+      margin: 0;
+      padding: 0;
+    }
+    nav a {
+      text-decoration: none;
+      color: var(--nav-text-color);
+      font-weight: 500;
+      transition: color var(--transition-speed) ease;
+    }
+    nav a:hover {
+      color: #0070c9;
+    }
+    .dark-mode-toggle {
+      cursor: pointer;
+      font-size: 1.2rem;
+      color: var(--nav-text-color);
+    }
+
+    main {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: calc(100vh - 60px);
+      text-align: center;
+      padding: 1rem;
+    }
+    h1 {
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+    }
+    p {
+      font-size: 1rem;
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 1.4;
+    }
+
+    footer {
+      text-align: center;
+      padding: 0.5rem;
+      font-size: 0.8rem;
+    }
+
+    body.dark-mode {
+      --bg-color: #000000;
+      --text-color: #ffffff;
+      --nav-bg: rgba(0, 0, 0, 0.8);
+      --nav-text-color: #ffffff;
+      --accent-color: #ffffff;
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="logo">
+      <a href="index.html">
+        <img src="./assets/IMG_1362-removebg-preview.png" alt="WCO Logo">
+      </a>
+      <span style="font-weight: bold;">WCO</span>
+    </div>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="board.html">Board</a></li>
+      <li><a href="resources.html">Resources</a></li>
+    </ul>
+    <div class="dark-mode-toggle" id="darkModeToggle" title="Toggle Dark Mode">
+      &#9788;
+    </div>
+  </nav>
+
+  <main>
+    <h1>Resources</h1>
+    <p>
+      Under Construction — Coming Soon!
+    </p>
+  </main>
+
+  <footer>
+    © 2024 World Computing Organization
+  </footer>
+
+  <script>
+    const toggleBtn = document.getElementById('darkModeToggle');
+    let isDarkMode = false;
+
+    if(localStorage.getItem('theme') === 'dark'){
+      document.body.classList.add('dark-mode');
+      isDarkMode = true;
+      toggleBtn.innerHTML = '&#9789;';
+    } else {
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      if(prefersDark){
+        document.body.classList.add('dark-mode');
+        isDarkMode = true;
+        toggleBtn.innerHTML = '&#9789;';
+      }
+    }
+
+    toggleBtn.addEventListener('click', () => {
+      isDarkMode = !isDarkMode;
+      document.body.classList.toggle('dark-mode');
+      toggleBtn.innerHTML = isDarkMode ? '&#9789;' : '&#9788;';
+      localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+    });
+  </script>
+</body>
+</html>
